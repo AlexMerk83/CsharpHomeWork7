@@ -37,18 +37,19 @@ void Task47CreateRandomMatrix()
 {
     Console.Clear();
 
-    double[,] array = ArrayHandler.CreateMatrix(ConsoleIOHandler.ReadInt("number of rows"),
-                                                ConsoleIOHandler.ReadInt("number of columns"),
-                                                ConsoleIOHandler.ReadDouble("minimal value"),
-                                                ConsoleIOHandler.ReadDouble("maximum value"),
-                                                ConsoleIOHandler.ReadInt("number of digits to be rounded"));
+    double[,] matrix = ArrayHandler.GetRandomMatrix(ConsoleIOHandler.ReadInt("number of rows"),
+                                                    ConsoleIOHandler.ReadInt("number of columns"),
+                                                    ConsoleIOHandler.ReadDouble("minimal value"),
+                                                    ConsoleIOHandler.ReadDouble("maximum value"),
+                                                    ConsoleIOHandler.ReadInt("number of digits to be rounded"));
 
-    System.Console.WriteLine(ArrayHandler.MatrixToString(array));
+    System.Console.WriteLine(ArrayHandler.MatrixToString(matrix));
 }
 #endregion
 
 #region Task50 Element by position
-// Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.
+// Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве,
+// и возвращает значение этого элемента или же указание, что такого элемента нет.
 // Например, задан массив:
 // 1 4 7 2
 // 5 9 2 3
@@ -58,6 +59,20 @@ void Task50ElementByPosition()
 {
     Console.Clear();
     
+    int[,] matrix = ArrayHandler.GetRandomMatrix(5, 5, 0);
+
+    System.Console.WriteLine($"Matrix {matrix.GetLength(0)}x{matrix.GetLength(1)}:");
+    System.Console.WriteLine(ArrayHandler.MatrixToString(matrix));
+
+    System.Console.WriteLine("Choose position of an element.");
+
+    int row = ConsoleIOHandler.ReadInt("row") - 1;
+    int col = ConsoleIOHandler.ReadInt("column") - 1;
+
+    if (row < 0 || row >= matrix.GetLength(0) || col < 0 || col >= matrix.GetLength(1))
+        System.Console.WriteLine("There is no such element");
+    else
+        System.Console.WriteLine($"Element on the position ({row+1}, {col+1}) is {matrix[row, col]}");
 
 }
 #endregion
@@ -73,6 +88,24 @@ void Task52ColumnsAverage()
 {
     Console.Clear();
 
+    int[,] matrix = ArrayHandler.GetRandomMatrix(ConsoleIOHandler.ReadInt("number of rows"),
+                                                    ConsoleIOHandler.ReadInt("number of columns"),
+                                                    0, 10);
 
+    System.Console.WriteLine($"Matrix {matrix.GetLength(0)}x{matrix.GetLength(1)}:");
+    System.Console.WriteLine(ArrayHandler.MatrixToString(matrix));
+
+    double[] columnAverage = new double[matrix.GetLength(1)];
+
+    for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            columnAverage[j] = 0;
+            for (int i = 0; i < matrix.GetLength(0); i++)
+                columnAverage[j] += matrix[i,j];
+            columnAverage[j] = Math.Round(columnAverage[j] / matrix.GetLength(0), 2);
+        }
+    
+    System.Console.WriteLine("Averages of the columns:");
+    System.Console.WriteLine(ArrayHandler.ArrayToString(columnAverage));
 }
 #endregion
