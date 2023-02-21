@@ -37,7 +37,13 @@ void Task47CreateRandomMatrix()
 {
     Console.Clear();
 
+    double[,] array = ArrayHandler.CreateMatrix(ConsoleIOHandler.ReadInt("number of rows"),
+                                                ConsoleIOHandler.ReadInt("number of columns"),
+                                                ConsoleIOHandler.ReadDouble("minimal value"),
+                                                ConsoleIOHandler.ReadDouble("maximum value"),
+                                                ConsoleIOHandler.ReadInt("number of digits to be rounded"));
 
+    System.Console.WriteLine(ArrayHandler.MatrixToString(array));
 }
 #endregion
 

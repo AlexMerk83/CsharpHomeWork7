@@ -84,25 +84,15 @@ namespace MyArrays
             string result = string.Empty;
 
             for (int i = 0; i < array.GetLength(0); i++)
+            {
                 for (int j = 0; j < array.GetLength(1); j++)
                     result += $"{array[i, j]} ";
 
                 result += Environment.NewLine;
+            }
 
             return result;
         }
-
-        public static void PrintMatrix(int[,] array)
-        {
-            Console.WriteLine();
-
-            for (int i = 0; i < array.GetLength(0); i++)
-                for (int j = 0; j < array.GetLength(1); j++)
-                    Console.Write($"{array[i, j]} ");
-    
-                Console.WriteLine();
-        }
-
     }
     #endregion
 }
